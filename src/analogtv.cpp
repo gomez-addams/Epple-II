@@ -162,7 +162,7 @@ public:
         }
     }
     int get(const int i) const { return this->cb[i]; }
-    int length() const { return this->cb.size(); }
+    int length() const { return (int)this->cb.size(); }
     void getPhase(double phase[]) const
     {
         {

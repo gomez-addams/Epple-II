@@ -17,20 +17,17 @@
  */
 #include "e2const.h"
 #include "paddles.h"
+#include "screenimage.h"
 
 #include <wx/gdicmn.h>
 #include <wx/window.h>
-
-#include <SDL.h>
 
 #include <boost/log/trivial.hpp>
 
 #include <iostream>
 #include <ostream>
 
-
-
-Paddles::Paddles() : rTick(PADDLE_COUNT) {
+Paddles::Paddles(ScreenImage* gui) : scrn(gui), rTick(PADDLE_COUNT) {
 }
 
 Paddles::~Paddles() {
@@ -52,10 +49,13 @@ void Paddles::startTimers() {
     }
 }
 
-static wxPoint current_mouse_position() {
-    int x, y;
-    SDL_GetMouseState(&x, &y);
-    return wxPoint(x, y);
+wxPoint Paddles::current_mouse_position() {
+    const auto p = ::wxGetMousePosition();
+
+    int x,y;
+    this->scrn->getPos(&x,&y);
+
+    return p-wxPoint(x,y);
 }
 
 void Paddles::tryStartPaddleTimers() {

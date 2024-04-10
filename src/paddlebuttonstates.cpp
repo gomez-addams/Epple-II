@@ -17,7 +17,7 @@
 */
 #include "paddlebuttonstates.h"
 
-#include <SDL.h>
+#include <wx/utils.h>
 
 const int PaddleButtonStates::PADDLE_COUNT(3);
 
@@ -35,10 +35,12 @@ bool PaddleButtonStates::isDown(const int paddle)
     {
         return false;
     }
-    unsigned char btn = SDL_GetMouseState(0,0);
+
+
+    // TODO clean up paddle button F keys
     if (paddle==0)
-        return btn&SDL_BUTTON_LMASK;
+        return wxGetKeyState(wxKeyCode::WXK_F3);
     if (paddle==1)
-        return btn&SDL_BUTTON_RMASK;
-    return btn&SDL_BUTTON_MMASK;
+        return wxGetKeyState(wxKeyCode::WXK_F9);
+    return wxGetKeyState(wxKeyCode::WXK_F12);
 }

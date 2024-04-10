@@ -18,20 +18,25 @@
 #ifndef PADDLES_H
 #define PADDLES_H
 
+#include <wx/utils.h>
 #include <vector>
+
+class ScreenImage;
 
 class Paddles
 {
 private:
+    ScreenImage* scrn;
     std::vector<int> rTick;
 
     enum { PADDLE_COUNT = 4 };
     enum { PADDLE_CYCLES = 2805 }; // TODO: document where PADDLE_CYCLES==2805 came from
 
     void tryStartPaddleTimers();
+    wxPoint current_mouse_position();
 
 public:
-    Paddles();
+    Paddles(ScreenImage* gui);
     ~Paddles();
     void tick();
     void startTimers();

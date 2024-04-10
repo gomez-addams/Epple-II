@@ -28,7 +28,6 @@
 #include "KeyRepeatHandler.h"
 #include "KeyEventHandler.h"
 #include "clipboardhandler.h"
-#include <SDL.h>
 #include <wx/string.h>
 
 class Timable;
@@ -46,8 +45,6 @@ class Emulator {
     KeyEventHandler keyEventHandler;
 
     Timable* timable;
-
-    Uint32 prev_ms;
 
     void powerOnComputer();
     void powerOffComputer();

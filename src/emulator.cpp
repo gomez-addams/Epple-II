@@ -25,8 +25,6 @@
 #include <wx/msgdlg.h>
 #include <wx/string.h>
 
-#include <SDL.h>
-
 #include <boost/log/trivial.hpp>
 
 #include <ctime>
@@ -43,8 +41,7 @@ Emulator::Emulator() :
     videoStatic(display),
     apple2(keypresses, paddleButtonStates, display, buffered, screenImage),
     keyEventHandler(keypresses, apple2.keyrepeater),
-    timable(nullptr), // No ticked object (NULL pointer)
-    prev_ms(SDL_GetTicks()) {
+    timable(nullptr) {// No ticked object (NULL pointer)
 }
 
 Emulator::~Emulator() {
@@ -61,7 +58,7 @@ void Emulator::config(E2Config& cfg) {
 
 
 
-// How many emulation ticks between asking SDL if there is any new input
+// How many emulation ticks between asking if there is any new input
 // from the user or other GUI events.
 // This is also how often we shall update the estimate of the emulator's
 // actual speed performance
@@ -76,9 +73,6 @@ void Emulator::tick50ms() {
             this->timable->tick(); // this runs the emulator!
         }
     }
-
-    this->screenImage.displayHz((1000*CHECK_EVERY_CYCLE)/(SDL_GetTicks() - this->prev_ms));
-    this->prev_ms = SDL_GetTicks();
 }
 
 

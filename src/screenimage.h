@@ -84,7 +84,6 @@ public:
     void drawFnKeys();
     void toggleKdbBufferLabel();
     void cycleDisplayLabel();
-    void displayHz(int hz);
     void toggleFillLinesLabel();
     void invertText(int row, int begincol, int endcol);
     void drawDisplayLabel();
@@ -110,6 +109,8 @@ public:
     void setFirmCard(int slot, bool bank, bool F8);
 
     void saveBMP();
+
+    void getPos(int* px, int* py);
 };
 
 #endif

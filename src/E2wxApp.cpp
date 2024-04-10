@@ -292,7 +292,7 @@ bool E2wxApp::OnCmdLineParsed(wxCmdLineParser& parser) {
 
     this->opt_config_from_prefs_only = parser.Found("p");
 
-    const int n = parser.GetParamCount();
+    const int n = (int)parser.GetParamCount();
 
     if (n == 1) {
         this->arg_configfile = path_from_string(parser.GetParam(0));

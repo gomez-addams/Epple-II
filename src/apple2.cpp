@@ -43,6 +43,7 @@ Apple2::Apple2(KeypressQueue& keypresses, PaddleButtonStates& paddleButtonStates
 slts(gui),
 kbd(keypresses, buffered),
 keyrepeater(keypresses),
+paddles(&gui),
 rom(AddressBus::MOTHERBOARD_ROM_SIZ),
 ram(revision),
 cassetteIn(gui),

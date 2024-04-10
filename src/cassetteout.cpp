@@ -19,8 +19,6 @@
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
-#include <SDL_audio.h>
-#include <SDL_log.h>
 #include "cassetteout.h"
 #include "e2const.h"
 #include <vector>

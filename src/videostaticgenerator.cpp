@@ -28,7 +28,7 @@ VideoStaticGenerator::VideoStaticGenerator(AnalogTV& display):
     hpos(0)
 {
     this->display.signal = sig;
-    srand(time(0));
+    srand((unsigned int)time(0));
 }
 
 

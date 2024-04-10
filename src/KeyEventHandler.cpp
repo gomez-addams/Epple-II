@@ -54,7 +54,7 @@ static bool is_key_down(const wxKeyEvent& keyEvent) {
     );
 }
 
-// Take real-world keystrokes from SDL and filter them to emulate the Apple ][ keyboard
+// Take real-world keystrokes and filter them to emulate the Apple ][ keyboard
 static bool translate_key(const wxKeyEvent& keyEvent, unsigned char* key) {
     const int keycode = keyEvent.GetKeyCode();
 
@@ -79,8 +79,7 @@ static bool translate_key(const wxKeyEvent& keyEvent, unsigned char* key) {
         *key -= 32;
     }
 
-    // from SDL 1.2 to 2.0, we can't use UNICODE so we need to
-    // apply shift and control modifiers ourselves
+    // TODO can't we use UNICODE instead of applying shift and control modifiers ourselves
     if (keyEvent.ShiftDown()) {
         if (keycode == '`') *key = '~';
         else if (keycode == '1') *key = '!';
@@ -154,8 +153,6 @@ void KeyEventHandler::dispatchKeyDown(const wxKeyEvent& keyEvent) {
     }
 
     const int sym = keyEvent.GetKeyCode();
-
-    //printf("keydown:   mod: %04X   sym: %08X   scan:%04X   name:%s\n", mod, sym, scan, SDL_GetKeyName(sym));
 
     if (is_key_down(keyEvent)) {
         ++this->keysDown;

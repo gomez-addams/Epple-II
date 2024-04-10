@@ -22,7 +22,7 @@ Disk2Drive::Disk2Drive(double p_random_ones_rate):
     pulse(false),
     bitBufferRead(0),
     random_ones_rate(p_random_ones_rate),
-    generator(std::chrono::system_clock::now().time_since_epoch().count()),
+    generator((unsigned int)std::chrono::system_clock::now().time_since_epoch().count()),
     distribution(0.0,1.0) {
 }
 

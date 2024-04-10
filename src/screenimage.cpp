@@ -193,7 +193,7 @@ void ScreenImage::drawSlot(int slot, int r, int c) {
     drawChar(':', r, c++);
     drawChar(' ', r, c++);
     drawText(this->slotnames[slot], r, c);
-    const int len = this->slotnames[slot].length();
+    const int len = (int)this->slotnames[slot].length();
     if (len < 100) {
         drawText(std::string(100 - len, ' '), r, c + len);
     }
@@ -205,7 +205,7 @@ void ScreenImage::drawCassette() {
     drawText("CASSETTE:  IN<-", r, c);
     c += 15;
     drawText(this->cassInName, r, c);
-    int len = this->cassInName.length();
+    int len = (int)this->cassInName.length();
     if (len < 40) {
         drawText(std::string(40 - len, ' '), r, c + len);
     }
@@ -214,7 +214,7 @@ void ScreenImage::drawCassette() {
     drawText("OUT->", r, c);
     c += 5;
     drawText(this->cassOutName, r, c);
-    len = this->cassOutName.length();
+    len = (int)this->cassOutName.length();
     if (len < 40) {
         drawText(std::string(40 - len, ' '), r, c + len);
     }
@@ -302,12 +302,6 @@ void ScreenImage::drawChar(const char ch, int row, int col, int color, int bgcol
     }
 }
 
-void ScreenImage::displayHz(int hz) {
-    char s[20];
-    sprintf(s, "%5.3f MHz   ", hz / 1e6);
-    drawText(s, 3, 141);
-}
-
 void ScreenImage::drawPower(bool on) {
     unsigned int* pn = this->pixels;
     pn += (HEIGHT + 35)*SCRW + 5;
@@ -388,10 +382,10 @@ void ScreenImage::setDiskFile(int slot, int drive, const std::filesystem::path &
     int c(37 + 32 * drive);
     drawText(f, r, c);
 
-    const int dlen = 12 - f.length();
+    const int dlen = 12 - (int)f.length();
     if (dlen > 0) {
         std::string d(dlen, ' ');
-        drawText(d, r, c + f.length());
+        drawText(d, r, c + (int)f.length());
     }
 
     this->slotnames[slot].replace(c - 20, 12, 12, ' ');
@@ -467,10 +461,10 @@ void ScreenImage::setCassetteInFile(const std::filesystem::path& filepath) {
     int c(85 + 11);
     drawText(f, r, c);
 
-    const int dlen = 12 - f.length();
+    const int dlen = 12 - (int)f.length();
     if (dlen > 0) {
         std::string d(dlen, ' ');
-        drawText(d, r, c + f.length());
+        drawText(d, r, c + (int)f.length());
     }
 
     this->cassInName.replace(c - 94, 12, 12, ' ');
@@ -483,10 +477,10 @@ void ScreenImage::setCassetteOutFile(const std::filesystem::path& filepath) {
     int c(85 + 11);
     drawText(f, r, c);
 
-    const int dlen = 12 - f.length();
+    const int dlen = 12 - (int)f.length();
     if (dlen > 0) {
         std::string d(dlen, ' ');
-        drawText(d, r, c + f.length());
+        drawText(d, r, c + (int)f.length());
     }
 
     this->cassOutName.replace(c - 94, 12, 12, ' ');
@@ -568,4 +562,8 @@ void ScreenImage::OnKeyDown(wxKeyEvent &evt) {
 
 void ScreenImage::OnKeyUp(wxKeyEvent &evt) {
     this->keyEventHandler.dispatchKeyUp(evt);
+}
+
+void ScreenImage::getPos(int* px, int* py) {
+    this->sdl->GetScreenPosition(px,py);
 }
