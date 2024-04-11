@@ -23,8 +23,6 @@
 
 
 
-#include <SDL_keycode.h>
-
 #include <wx/defs.h>
 #include <wx/app.h>
 #include <wx/event.h>
