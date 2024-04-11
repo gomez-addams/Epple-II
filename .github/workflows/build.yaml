@@ -66,7 +66,7 @@ jobs:
             shell: "bash"
           - os: "macos-12"
             shell: "bash"
-          - os: "windows-latest"
+          - os: "windows-2019"
             shell: "msys2 {0}"
 
     runs-on: "${{ matrix.os }}"
