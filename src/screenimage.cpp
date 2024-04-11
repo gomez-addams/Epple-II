@@ -92,9 +92,9 @@ ScreenImage::~ScreenImage() {
 
 
 void ScreenImage::OnIdle(wxIdleEvent &evt) {
-    if (!this->FindFocus() || !this->sdl->HasFocus()) {
-        this->sdl->SetFocus();
-    }
+//    if (!this->FindFocus() || !this->sdl->HasFocus()) {
+//        this->sdl->SetFocus();
+//    }
 }
 
 void ScreenImage::HandleUserCloseWindowRequest(wxCloseEvent& event) {

@@ -36,15 +36,17 @@
 #include <wx/stdpaths.h>
 #include <wx/debugrpt.h>
 
+#include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
 #include <boost/log/utility/setup/file.hpp>
 #include <boost/log/utility/setup/common_attributes.hpp>
 #include <boost/log/sources/severity_feature.hpp>
 #include <boost/log/sources/record_ostream.hpp>
+#include <boost/log/expressions/formatters/date_time.hpp>
 #include <boost/log/expressions/formatters/stream.hpp>
 #include <boost/log/expressions.hpp>
-#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/log/support/date_time.hpp>
 
 #include <iostream>
 #include <string>
@@ -357,14 +359,15 @@ void E2wxApp::InitBoostLog() {
 
 
     boost::log::add_file_log(
-            boost::log::keywords::file_name = this->logfile,
-            boost::log::keywords::auto_flush = true,
-            boost::log::keywords::format = (
-                boost::log::expressions::stream <<
-                    to_iso_extended_string(boost::posix_time::microsec_clock::universal_time()) << "Z " <<
-                    boost::log::trivial::severity << " " <<
-                    boost::log::expressions::message
-            ));
+        boost::log::keywords::file_name = this->logfile,
+        boost::log::keywords::auto_flush = true,
+        boost::log::keywords::format = (
+            boost::log::expressions::stream <<
+                boost::log::expressions::format_date_time<boost::posix_time::ptime>("TimeStamp", "%Y-%m-%dT%H:%M:%S.%fZ") << " " <<
+                boost::log::trivial::severity << " " <<
+                boost::log::expressions::message
+        )
+    );
 
     boost::log::add_common_attributes();
 }
