@@ -18,6 +18,7 @@
 */
 
 #include "gui.h"
+#include <SDL.h>
 #include <wx/app.h>
 #include <cstdio>
 
