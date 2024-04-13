@@ -4,6 +4,7 @@ set -e
 
 if [ -e "$1/CMakeCache.txt" ] ; then
     builddir="$1"
+    shift
 else
     mkdir -p tmp
     builddir=$(mktemp -d tmp/tmp.XXXXXXXXXX)

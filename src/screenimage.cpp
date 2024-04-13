@@ -70,6 +70,7 @@ class ScreenException {
 ScreenImage::ScreenImage(Emulator &emulator, KeyEventHandler &k) :
     wxFrame(nullptr, wxID_ANY, "Emulator"),
     emu(emulator),
+    window(nullptr),
     fullscreen(false),
     buffer(true),
     display(AnalogTV::TV_OLD_COLOR),
@@ -91,12 +92,6 @@ ScreenImage::~ScreenImage() {
 
 
 
-
-void ScreenImage::OnIdle(wxIdleEvent &evt) {
-//    if (!this->FindFocus() || !this->wxPanelEmuScreen->HasFocus()) {
-//        this->wxPanelEmuScreen->SetFocus();
-//    }
-}
 
 void ScreenImage::HandleUserCloseWindowRequest(wxCloseEvent& event) {
     wxGetApp().StopEmulator();
@@ -167,6 +162,9 @@ void ScreenImage::createSdlTexture() {
 }
 
 void ScreenImage::destroyScreen() {
+    if (!this->window) {
+        return;
+    }
     SDL_DestroyTexture(this->texture);
     SDL_DestroyRenderer(this->renderer);
     SDL_DestroyWindow(this->window);
@@ -336,6 +334,9 @@ void ScreenImage::drawPower(bool on) {
 }
 
 void ScreenImage::notifyObservers() {
+    if (!this->window) {
+        return;
+    }
     const int e = SDL_UpdateTexture(this->texture, NULL, this->pixels, SCRW*sizeof(unsigned int));
     if (e) {
         std::cerr << SDL_GetError() << std::endl;

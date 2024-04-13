@@ -57,7 +57,6 @@ private:
     void createSdlTexture();
     void destroyScreen();
 
-    void OnIdle(wxIdleEvent &evt);
     void OnKeyDown(wxKeyEvent &evt);
     void OnKeyUp(wxKeyEvent &evt);
     void HandleUserCloseWindowRequest(wxCloseEvent& event);
