@@ -82,7 +82,6 @@ ScreenImage::ScreenImage(Emulator &emulator, KeyEventHandler &k) :
     createScreen();
     Center();
     Show();
-    Bind(wxEVT_IDLE, &ScreenImage::OnIdle, this);
     Bind(wxEVT_CLOSE_WINDOW, &ScreenImage::HandleUserCloseWindowRequest, this);
 }
 
