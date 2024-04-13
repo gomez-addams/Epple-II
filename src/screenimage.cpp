@@ -73,10 +73,11 @@ ScreenImage::ScreenImage(Emulator &emulator, KeyEventHandler &k) :
     fullscreen(false),
     buffer(true),
     display(AnalogTV::TV_OLD_COLOR),
+    keyEventHandler(k),
     slotnames(8),
     cassInName(32, ' '),
-    cassOutName(32, ' '),
-    keyEventHandler(k) {
+    cassOutName(32, ' ')
+{
     createScreen();
     Center();
     Show();
@@ -92,8 +93,8 @@ ScreenImage::~ScreenImage() {
 
 
 void ScreenImage::OnIdle(wxIdleEvent &evt) {
-//    if (!this->FindFocus() || !this->sdl->HasFocus()) {
-//        this->sdl->SetFocus();
+//    if (!this->FindFocus() || !this->wxPanelEmuScreen->HasFocus()) {
+//        this->wxPanelEmuScreen->SetFocus();
 //    }
 }
 
@@ -114,13 +115,13 @@ void ScreenImage::toggleFullScreen() {
 }
 
 void ScreenImage::createScreen() {
-    this->sdl = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(SCRW,SCRH*ASPECT_RATIO));
+    this->wxPanelEmuScreen = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(SCRW,SCRH*ASPECT_RATIO));
     createSdlTexture();
-    this->sdl->Bind(wxEVT_KEY_DOWN, &ScreenImage::OnKeyDown, this);
-    this->sdl->Bind(wxEVT_KEY_UP, &ScreenImage::OnKeyUp, this);
+    this->wxPanelEmuScreen->Bind(wxEVT_KEY_DOWN, &ScreenImage::OnKeyDown, this);
+    this->wxPanelEmuScreen->Bind(wxEVT_KEY_UP, &ScreenImage::OnKeyUp, this);
 
     wxSizer *pszr = new wxBoxSizer(wxVERTICAL);
-    pszr->Add(this->sdl);
+    pszr->Add(this->wxPanelEmuScreen);
     SetSizer(pszr);
     pszr->SetSizeHints(this);
 
@@ -140,7 +141,7 @@ static void *get_native_window_handle(wxWindowBase *panel) {
 }
 
 void ScreenImage::createSdlTexture() {
-    void *nativeSdl = get_native_window_handle(this->sdl);
+    void *nativeSdl = get_native_window_handle(this->wxPanelEmuScreen);
 
     this->window = SDL_CreateWindowFrom(nativeSdl);
     if (this->window == NULL) {
@@ -371,6 +372,10 @@ void ScreenImage::removeCard(const int slot, Card* card /* empty */) {
     updateSlotName(slot, card);
 }
 
+static std::string truncateFilePath(const std::filesystem::path& filepath) {
+    return filepath.stem().string().substr(0, 12);
+}
+
 /*
 1  2         3         4         5         6         7         8
 789012345678901234567890123456789012345678901234567890123456789012345
@@ -390,10 +395,6 @@ void ScreenImage::setDiskFile(int slot, int drive, const std::filesystem::path &
 
     this->slotnames[slot].replace(c - 20, 12, 12, ' ');
     this->slotnames[slot].replace(c - 20, f.length(), f);
-}
-
-std::string ScreenImage::truncateFilePath(const std::filesystem::path& filepath) {
-    return filepath.stem().string().substr(0, 12);
 }
 
 void ScreenImage::clearCurrentDrive(int slot, int drive) {
@@ -565,5 +566,5 @@ void ScreenImage::OnKeyUp(wxKeyEvent &evt) {
 }
 
 void ScreenImage::getPos(int* px, int* py) {
-    this->sdl->GetScreenPosition(px,py);
+    this->wxPanelEmuScreen->GetScreenPosition(px,py);
 }

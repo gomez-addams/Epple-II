@@ -39,7 +39,7 @@ struct SDL_Window;
 class ScreenImage : public wxFrame {
 private:
     Emulator &emu;
-    wxPanel *sdl;
+    wxPanel *wxPanelEmuScreen;
     SDL_Window* window;
     SDL_Renderer* renderer;
     SDL_Texture* texture;
@@ -48,16 +48,14 @@ private:
     bool fullscreen;
     bool buffer;
     AnalogTV::DisplayType display;
-    void createScreen();
-    void createSdlTexture();
-    void destroyScreen();
+    KeyEventHandler &keyEventHandler;
     std::vector<std::string> slotnames;
     std::string cassInName;
     std::string cassOutName;
 
-    KeyEventHandler &keyEventHandler;
-
-    static std::string truncateFilePath(const std::filesystem::path& filepath);
+    void createScreen();
+    void createSdlTexture();
+    void destroyScreen();
 
     void OnIdle(wxIdleEvent &evt);
     void OnKeyDown(wxKeyEvent &evt);
