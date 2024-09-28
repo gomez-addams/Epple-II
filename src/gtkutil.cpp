@@ -4,8 +4,8 @@
 
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
-#include <gtk-2.0/gtk/gtkwindow.h>
-#include <gtk-2.0/gtk/gtkwidget.h>
+#include <gtk-3.0/gtk/gtkwindow.h>
+#include <gtk-3.0/gtk/gtkwidget.h>
 
 void *get_gtk_native_window_handle(void *widget) {
     GtkWidget *gtk_widget = GTK_WIDGET(widget);
