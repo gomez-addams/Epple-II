@@ -14,7 +14,7 @@ RELOC65=reloc65
 	$(M4) -I ./ $(M4FLAGS) $< >$@
 
 .s65.o65:
-	$(XA65) -C -M -R -c -bt 0 $(ZERO_SEGS) -o $@ $(XA65FLAGS) $<
+	$(XA65) -C -MASM -XXA23 -R -c -bt 0 $(ZERO_SEGS) -o $@ $(XA65FLAGS) $<
 
 .o65.r65:
 	$(LDO65) -bt $(CODE_SEG) $(ZERO_SEGS) -o $@ $(LD65FLAGS) $^

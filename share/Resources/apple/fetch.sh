@@ -2,7 +2,7 @@
 
 curl -LO https://github.com/cmosher01/Apple-II-System-Masters/releases/download/v1.1.0/apple2sysmas.zip
 unzip apple2sysmas.zip
-curl -LO https://github.com/cmosher01/Apple-II-Source/releases/download/v1.1.2/apple2sys.zip
+curl -LO https://github.com/cmosher01/Apple-II-Source/releases/download/v1.2.1/apple2sys.zip
 unzip apple2sys.zip
 
 mkdir stage
