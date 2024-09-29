@@ -29,7 +29,7 @@ jobs:
           cmake ..
           cmake --build .
 
-      - uses: "actions/upload-artifact@v3"
+      - uses: "actions/upload-artifact@v4"
         with:
           name: "epple2-roms"
           path: "share/Resources/rom/*.a65"
@@ -47,7 +47,7 @@ jobs:
           cd share/Resources/apple
           ./fetch.sh
 
-      - uses: "actions/upload-artifact@v3"
+      - uses: "actions/upload-artifact@v4"
         with:
           name: "apple2-artifacts"
           path: "share/Resources/apple/stage/*"
