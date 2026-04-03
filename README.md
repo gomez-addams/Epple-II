@@ -6,12 +6,10 @@ Copyright © 2008–2022, Christopher Alan Mosher, Shelton, Connecticut, USA, <c
 [![Website](https://img.shields.io/website/https/cmosher01.github.io/Epple-II.svg)](https://cmosher01.github.io/Epple-II)
 [![Latest Release](https://img.shields.io/github/release/cmosher01/Epple-II.svg)](https://github.com/cmosher01/Epple-II/releases/latest)
 [![Build](https://github.com/cmosher01/Epple-II/actions/workflows/build.yaml/badge.svg)](https://github.com/cmosher01/Epple-II/actions/workflows/build.yaml)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](./code-of-conduct.md)
 
 See file [`LICENSE.other`](LICENSE.other) for additional copyright notices.
 
-Please note this project is released with a Contributor  Code of Conduct. By
-participating in this project you agree to abide by its terms.
+Everyone involved should follow the golden rule, which doesn't include an obligation to lie to each other.
 
 ---
 ## overview
